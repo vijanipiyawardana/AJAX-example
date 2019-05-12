@@ -28,6 +28,20 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
   	<servlet-class>com.vijani.newShop.servlet.GetItems</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>DeleteItem</servlet-name>
+  	<!--  <display-name>GetItems</display-name>
+  	<description></description>-->
+  	<servlet-class>com.vijani.newShop.servlet.DeleteItem</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>UpdateItem</servlet-name>
+  	<!--  <display-name>GetItems</display-name>
+  	<description></description>-->
+  	<servlet-class>com.vijani.newShop.servlet.UpdateItem</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
   	<servlet-name>AddItem</servlet-name>
   	<url-pattern>/AddItem</url-pattern>
@@ -36,6 +50,16 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
   <servlet-mapping>
   	<servlet-name>GetItems</servlet-name>
   	<url-pattern>/GetItems</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>DeleteItem</servlet-name>
+  	<url-pattern>/DeleteItem</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>UpdateItem</servlet-name>
+  	<url-pattern>/UpdateItem</url-pattern>
   </servlet-mapping>
   
 </web-app>

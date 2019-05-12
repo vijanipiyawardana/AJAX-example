@@ -46,13 +46,59 @@
 	
 		
 		function deleteItem(){
-			//document.getElementById("demo").innerHTML = "Hello World";
 			alert("you delete the value! " + this.itemid);
+			var id = this.itemid;
 			var request = getRequest();
+			request.onload = function() {
+				//alert(request.responseText);
+				if(request.responseText == "item deleted"){
+					viewItems();
+				}
+			};
+			request.open("GET", "DeleteItem?id=" + id, true);
+			request.send(null);
+			
+		
+			/*
+			request.open("GET", "AddItem?name=" + name + "&qtyOnHand="
+					+ qtyOnHand + "&unitPrice=" + unitPrice, true);
+			request.send(null);
+			*/
+			
 		}
 		
 		function updateItem(){
 			alert("you edit the value! " + this.itemid);
+			var id = this.itemid;
+			
+			var label = this.innerHTML;
+			
+			if(label == "Edit"){
+				this.innerHTML = "Save";
+				var element1 = documentgetElementById("itemName"+id);
+				element1.readOnly = false;
+				var element2 = documentgetElementById("quantity"+id);
+				element2.readOnly = false;
+				var element3 = documentgetElementById("unitPrice"+id);
+				element3.readOnly = false;
+			}else{
+				this.innerHTML = "Edit";
+				var request = getRequest();
+				request.onload = function() {
+					if(request.responseText == "item updated"){
+						viewItems();
+					}
+				};
+				
+				request.open("GET", "UpdateItem?id=" + id 
+						+ "&newName=" + element1.value 
+						+ "&newQty=" + element2.value 
+						+ "&newUnitPrice" + element3.value
+						, true);
+				
+				request.send(null);
+				viewItems();
+			}
 		}
 		
 	
@@ -83,6 +129,7 @@
 					var element0 = document.createElement("input");
 					element0.type = "text"; 
 					element0.readOnly = true;
+					element0.id = "itemid" + (i+1) ;
 					element0.name = "itemid" + (i+1) ;
 					element0.value = item.id;
 					cell0.appendChild(element0);
@@ -91,6 +138,7 @@
 					var element1 = document.createElement("input");
 					element1.type = "text"; 
 					element1.readOnly = true;
+					element1.id = "itemName" + (i+1) ;
 					element1.name = "itemName" + (i+1) ;
 					element1.value = item.name;
 					cell1.appendChild(element1);
@@ -99,6 +147,7 @@
 					var element2 = document.createElement("input");
 					element2.type = "text"; 
 					element2.readOnly = true;
+					element2.id = "quantity" + (i+1) ;
 					element2.name = "quantity" + (i+1) ;
 					element2.value = item.qtyOnHand;
 					cell2.appendChild(element2);
@@ -107,6 +156,7 @@
 					var element3 = document.createElement("input");
 					element3.type = "text"; 
 					element3.readOnly = true;
+					element3.id = "unitPrice" + (i+1) ;
 					element3.name = "unitPrice" + (i+1) ;
 					element3.value = item.unitPrice;
 					cell3.appendChild(element3);
@@ -115,6 +165,7 @@
 					var element4 = document.createElement("button");
 					element4.type = "submit";
 					element4.innerHTML = "Edit";
+					element4.id = "editBtn" + (i+1);
 					element4.name = "editBtn" + (i+1);
 					element4.itemid = item.id;
 					element4.addEventListener("click", updateItem);
@@ -128,6 +179,7 @@
 					var element5 = document.createElement("button");
 					element5.type = "submit";
 					element5.innerHTML = "Delete";
+					element5.id = "deleteBtn" + (i+1);
 					element5.name = "deleteBtn" + (i+1);
 					element5.itemid = item.id;
 					element5.addEventListener("click", deleteItem);
@@ -156,9 +208,12 @@
 
 			var request = getRequest();
 			request.onload = function() {
-				alert(request.responseText);
-
+				//alert(request.responseText);
+				if(request.responseText == "item added"){
+					viewItems();
+				}
 			};
+			
 			request.open("GET", "AddItem?name=" + name + "&qtyOnHand="
 					+ qtyOnHand + "&unitPrice=" + unitPrice, true);
 			request.send(null);
