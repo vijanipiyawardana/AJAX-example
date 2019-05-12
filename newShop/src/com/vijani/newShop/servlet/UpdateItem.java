@@ -26,8 +26,8 @@ public class UpdateItem extends HttpServlet{
 		Long id = (Long.parseLong(request.getParameter("id")));
 		
 		String updatedName = request.getParameter("newName");
-		int updatedQty = (Integer.parseInt(request.getParameter("newQty")));
-		float updatedUnitPrice = (Float.parseFloat(request.getParameter("newUnitPrice")));
+		Integer updatedQty = (Integer.parseInt(request.getParameter("newQty")));
+		Float updatedUnitPrice = (Float.parseFloat(request.getParameter("newUnitPrice")));
 	
 		session.getTransaction().begin();
 		

@@ -73,14 +73,17 @@
 			
 			var label = this.innerHTML;
 			
+			var element1 = document.getElementById("itemName"+id);
+			var element2 = document.getElementById("quantity"+id);
+			var element3 = document.getElementById("unitPrice"+id);
+			
 			if(label == "Edit"){
 				this.innerHTML = "Save";
-				var element1 = documentgetElementById("itemName"+id);
+				
 				element1.readOnly = false;
-				var element2 = documentgetElementById("quantity"+id);
-				element2.readOnly = false;
-				var element3 = documentgetElementById("unitPrice"+id);
+				element2.readOnly = false;	
 				element3.readOnly = false;
+				
 			}else{
 				this.innerHTML = "Edit";
 				var request = getRequest();
@@ -93,7 +96,7 @@
 				request.open("GET", "UpdateItem?id=" + id 
 						+ "&newName=" + element1.value 
 						+ "&newQty=" + element2.value 
-						+ "&newUnitPrice" + element3.value
+						+ "&newUnitPrice=" + element3.value
 						, true);
 				
 				request.send(null);
@@ -129,8 +132,8 @@
 					var element0 = document.createElement("input");
 					element0.type = "text"; 
 					element0.readOnly = true;
-					element0.id = "itemid" + (i+1) ;
-					element0.name = "itemid" + (i+1) ;
+					element0.id = "itemid" + item.id ;
+					element0.name = "itemid" + item.id ;
 					element0.value = item.id;
 					cell0.appendChild(element0);
 					
@@ -138,8 +141,8 @@
 					var element1 = document.createElement("input");
 					element1.type = "text"; 
 					element1.readOnly = true;
-					element1.id = "itemName" + (i+1) ;
-					element1.name = "itemName" + (i+1) ;
+					element1.id = "itemName" + item.id ;
+					element1.name = "itemName" + item.id ;
 					element1.value = item.name;
 					cell1.appendChild(element1);
 					
@@ -147,8 +150,8 @@
 					var element2 = document.createElement("input");
 					element2.type = "text"; 
 					element2.readOnly = true;
-					element2.id = "quantity" + (i+1) ;
-					element2.name = "quantity" + (i+1) ;
+					element2.id = "quantity" + item.id ;
+					element2.name = "quantity" + item.id ;
 					element2.value = item.qtyOnHand;
 					cell2.appendChild(element2);
 					
@@ -156,8 +159,8 @@
 					var element3 = document.createElement("input");
 					element3.type = "text"; 
 					element3.readOnly = true;
-					element3.id = "unitPrice" + (i+1) ;
-					element3.name = "unitPrice" + (i+1) ;
+					element3.id = "unitPrice" + item.id ;
+					element3.name = "unitPrice" + item.id ;
 					element3.value = item.unitPrice;
 					cell3.appendChild(element3);
 					
@@ -165,8 +168,8 @@
 					var element4 = document.createElement("button");
 					element4.type = "submit";
 					element4.innerHTML = "Edit";
-					element4.id = "editBtn" + (i+1);
-					element4.name = "editBtn" + (i+1);
+					element4.id = "editBtn" + item.id;
+					element4.name = "editBtn" + item.id;
 					element4.itemid = item.id;
 					element4.addEventListener("click", updateItem);
 					/*element4.addEventListener("click", function(){
@@ -179,8 +182,8 @@
 					var element5 = document.createElement("button");
 					element5.type = "submit";
 					element5.innerHTML = "Delete";
-					element5.id = "deleteBtn" + (i+1);
-					element5.name = "deleteBtn" + (i+1);
+					element5.id = "deleteBtn" + item.id;
+					element5.name = "deleteBtn" + item.id;
 					element5.itemid = item.id;
 					element5.addEventListener("click", deleteItem);
 					
